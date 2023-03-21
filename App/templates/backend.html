@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block nav-content %}
+    <i class="fas fa-user-edit"></i>&nbsp; &nbsp;Пациенты
+{% endblock nav-content %}
+
+{% block btn-nav %}
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm border-light text-light" id="btn-nav">Выход</a>
+{% endblock btn-nav %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="d-flex justify-content-between">
+            <a href="{% url 'add_patient' %}" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i>&nbsp;&nbsp; Добавить пациента</a>
+            <span>
+            Добро пожаловать: <strong> <span class="text-primary">{{ user.get_username }}</span></strong>
+        </span>
+        </div>
+
+        <form method="get">
+            <div class="input-group input-group-sm mb-3 mt-4">
+                <input name="q" type="text" class="form-control" placeholder="Найти...">
+                <button class="btn btn-secondary"><i class="fas fa-search"></i></button>
+                <a href="{% url 'backend' %}" class="btn btn-dark" style="margin-left: 4px;">
+                    <i class="fas fa-sync-alt"></i></a>
+            </div>
+        </form>
+
+        <div style="margin-left: auto">
+            <table class="table table-bordered table-sm" style="text-align: center; font-size: 14px;">
+                <thead class="table-primary">
+                <tr>
+                    <th>ФИО</th>
+                    <th>Телефон</th>
+                    <th>Email</th>
+                    <th>Возраст</th>
+                    <th>Пол</th>
+                    <th>Дата регистрации</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.name }}</td>
+                        <td>{{ patient.phone }}</td>
+                        <td>{{ patient.email }}</td>
+                        <td>{{ patient.age }}</td>
+                        <td>{{ patient.gender }}</td>
+                        <td>{{ patient.created_at|date:"M d, Y (H:i)" }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <!--Pagination-->
+
+            <nav class="mt-4">
+                {% if patients.has_other_pages %}
+
+                    <ul class="pagination justify-content-left">
+                        {% if patients.has_previous %}
+                            <a href="?page=1" class="btn btn-outline-primary primary mb-4" style="width: 100px; border-radius: 1px; border: 1px solid #d3d3d3">Первая</a>
+                            <li class="page-item"><a class="page-link" href="?page={{ patients.previous_page_number }}"><i class="fas fa-angle-double-left"></i></a></li>
+                        {% else %}
+                            <li class="page-item disabled"></li>
+                        {% endif %}
+
+                        {% for i in patients.paginator.page_range %}
+                            {% if patients.number == i %}
+                            <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only"></span> </span></li>
+                            {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}   
+
+                        {% if patients.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ patients.next_page_number }}"><i class="fas fa-angle-double-right"></i></a></li>
+                            <a href="?page={{ patients.paginator.num_pages }}" class="btn btn-outline-primary mb-4"
+                               style="width: 100px; border-radius: 1px; border: 1px solid #d3d3d3; border-left: none">Последняя</a>
+                            {% else %}
+                            <li class="page-item disabled"></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+
+            </nav>
+
+
+        </div>
+
+
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <script>
+                    var m = "{{ message }}";
+                    swal("Отлично!", m, "success")
+                </script>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+{% endblock content %}
+
+

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block nav-content %}
+    <i class="fas fa-stethoscope"></i>&nbsp; &nbsp;Авторизация
+{% endblock nav-content %}
+
+ {% block btn-nav %}
+ <a href="{% url 'frontend' %}" class="btn btn-outline-primary btn-sm border-light text-light" id="btn-nav">Назад</a>
+ {% endblock btn-nav %}
+<!---->
+{% block content %}
+    <div class="container mt-5">
+        <div class="card p-3 border-dark">
+            <span class="btn btn-outline-dark mt-3"><i class="fas fa-lock"></i>&nbsp;&nbsp; Требуется авторизация!</span>
+            <form method="POST" >
+                {% csrf_token %}
+                <div class="input-group mb-3 mt-5">
+                    <span class="input-group-text"><i class="fas fa-user-alt"></i></span>
+                    <input type="text" class="form-control" name="username" placeholder="Логин:">
+                </div>
+                <div class="input-group mb-3 mt-5">
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" class="form-control" name="password" placeholder="Пароль:">
+                </div>
+                <input class="btn btn-primary btn-sm mt-4 mb-3" type="submit" value="Вход" id="btn-enter">
+            </form>
+        </div>
+
+    <!---Message from backend-->
+    {% if form.errors %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            swal("Внимание!","Проверьте правильность данных","error");
+        </script>
+
+    {% endif %}
+
+        <div id="heart">
+            <i class="text-primary fas fa-heartbeat fa-10x blink_me"></i>
+        </div>
+    </div>
+
+{% endblock %}
