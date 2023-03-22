@@ -20,9 +20,9 @@
         </div>
 
         <form method="get">
-            <div class="input-group input-group-sm mb-3 mt-4">
+               <div class="input-group input-group-sm mb-3 mt-4">
                 <input name="q" type="text" class="form-control" placeholder="Найти...">
-                <button class="btn btn-secondary"><i class="fas fa-search"></i></button>
+                <button  class="btn btn-secondary"><i class="fas fa-search"></i></button>
                 <a href="{% url 'backend' %}" class="btn btn-dark" style="margin-left: 4px;">
                     <i class="fas fa-sync-alt"></i></a>
             </div>
@@ -32,13 +32,13 @@
             <table class="table table-bordered table-sm" style="text-align: center; font-size: 14px;">
                 <thead class="table-primary">
                 <tr>
-                    <th>ФИО</th>
-                    <th>Телефон</th>
-                    <th>Email</th>
-                    <th>Возраст</th>
-                    <th>Пол</th>
-                    <th>Дата регистрации</th>
-                    <th>Действия</th>
+                    <th style="width: 21%">ФИО</th>
+                    <th style="width: 15%">Телефон</th>
+                    <th style="width: 21%">Email</th>
+                    <th style="width: 8%">Возраст</th>
+                    <th style="width: 7%">Пол</th>
+                    <th style="width: 18%">Дата регистрации</th>
+                    <th colspan="2" style="width: 10%">Действия</th>
                 </tr>
                 </thead>
                 {% for patient in patients %}
@@ -49,6 +49,16 @@
                         <td>{{ patient.age }}</td>
                         <td>{{ patient.gender }}</td>
                         <td>{{ patient.created_at|date:"M d, Y (H:i)" }}</td>
+                        <td>
+                            <a class="btn btn-primary" href="/patient/{{ patient.id }}" title="Редактировать">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-secondary" href="#" title="Удалить">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
@@ -72,7 +82,7 @@
                             {% else %}
                             <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                             {% endif %}
-                        {% endfor %}   
+                        {% endfor %}
 
                         {% if patients.has_next %}
                             <li class="page-item"><a class="page-link" href="?page={{ patients.next_page_number }}"><i class="fas fa-angle-double-right"></i></a></li>

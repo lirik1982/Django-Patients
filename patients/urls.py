@@ -11,6 +11,8 @@ urlpatterns = [
     path('backend/', views.backend, name='backend'),
 # url in brawser        func in views    url inside template.html
 
-    path('add_patient/', views.add_patient, name='add_patient')
+    path('add_patient/', views.add_patient, name='add_patient'),
+
+    path('patient/<str:patient_id>', views.patient, name='patient'),
 
 ]

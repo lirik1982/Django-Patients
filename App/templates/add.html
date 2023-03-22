@@ -12,25 +12,31 @@
                 <form action="/add_patient/" method="POST" autocomplete="off" class="card p-3 border-dark mt-3">
                     {% csrf_token %}
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text">ФИО</span>
-                        <input type="text" class="form-control" name="name" placeholder="Фамилия, имя и отчество:">
+                        <span class="input-group-text side-made" >ФИО</span>
+                        <input type="text" class="form-control side-label" name="name" placeholder="Фамилия, имя и отчество:"
+                                {% block Value-name %} {% endblock Value-name %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text">Телефон</span>
-                        <input type="text" class="form-control" name="phone" placeholder="Телефон:">
+                        <span class="input-group-text side-mane">Телефон</span>
+                        <input type="text" class="form-control" name="phone" placeholder="Телефон:"
+                                {% block Value-phone %} {% endblock Value-phone %}>>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text">Email</span>
-                        <input type="text" class="form-control" name="email" placeholder="Электронная почта:">
+                        <span class="input-group-text side-maid" >Email</span>
+                        <input type="text" class="form-control" name="email" placeholder="Электронная почта:"
+                                {% block Value-email %} {% endblock Value-email %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text">Возраст</span>
+                        <span class="input-group-text side-made">Возраст</span>
                         <input type="text" class="form-control" name="age" placeholder="Возраст:">
+                        {% block Value-age %} {% endblock Value-age %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <label class="input-group-text">Выберите пол:</label>
+                        <label class="input-group-text side-made q side-made">Выберите пол:</label>
                         <select class="form-select" name="gender">
-                            <option value="" hidden>Выберите пол</option>
+                            {% block option %}
+                                <option value="" hidden>Выберите пол</option>
+                            {% endblock option %}>
                             <option disabled></option>
                             <option>М</option>
                             <option>Ж</option>
