@@ -1,0 +1,15 @@
+{% extends 'add.html' %}
+
+
+{% block Value-name %} value = "{{ patient.name }}" {% endblock Value-name %}
+
+{% block Value-phone %} value = "{{ patient.phone }}" {% endblock Value-phone %}
+
+{% block Value-email %} value = "{{ patient.email }}" {% endblock Value-email %}
+
+{% block Value-age %} value = "{{ patient.age }}" {% endblock Value-age %}
+
+{% block option %}
+    <option style="background-color: #d3d3d3, color: #007bff;"{{ patient.gender }} </option>
+
+{% endblock option %}
