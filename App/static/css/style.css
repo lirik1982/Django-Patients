@@ -37,6 +37,10 @@ html,body{
     width: 100px;
 }
 
+.icon-width{
+    width: 40px;
+}
+
 #heart{
     position: absolute;
     top: 70%;
@@ -47,6 +51,53 @@ html,body{
 }
 
 .side-label{
-    width: 76px;
+    width: 90px;
 }
 
+#no-data{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+}
+
+/************************************
+Custom sweet
+************************************/
+.swal-text{
+    text-align: center;
+}
+
+.swal-icon--success:before,
+.swal-icon--success:after,
+.swal-icon--success__hide-corners{
+    background: none !important;
+}
+
+.swal-icon--success{
+    /*circle color */
+    border-color: lightblue;
+}
+
+.swal-icon--success__line{
+    background-color: lightblue;
+}
+
+.swal-button{
+    padding: 7px 19px;
+    border-radius: 5px;
+    background-color: lightblue;
+    font-size: 12px;
+    border: 1px solid lightblue;
+}
+
+.swal-button:focus{
+    box-shadow: none;
+}
+
+.swal-button:not(disabled):hover{
+    background: transparent;
+    color: #111;
+    border: 1px solid lightblue;
+}

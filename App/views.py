@@ -6,12 +6,14 @@ from django.contrib import  messages
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.views.decorators.cache import cache_control
 
 def frontend(request):
     return render(request, "frontend.html")
 
 
 # ----------------BACKEND--------------------
+@cache_control(no_cache=True, must_validate=True, no_store=True)
 @login_required(login_url="login")
 def backend(request):
     if 'q' in request.GET:
@@ -23,12 +25,14 @@ def backend(request):
     else:
         all_patient_list = Patient.objects.all().order_by('-created_at')
 
-    paginator = Paginator(all_patient_list, 5)
+    paginator = Paginator(all_patient_list, 8)
     page = request.GET.get('page')
     all_patient = paginator.get_page(page)
 
     return render(request, 'backend.html', {'patients': all_patient})
 
+
+@cache_control(no_cache = True, must_validate = True, no_store = True)
 @login_required(login_url="login")
 def add_patient(request):
     if request.method == "POST":
@@ -45,10 +49,35 @@ def add_patient(request):
             return HttpResponseRedirect('/backend')
     return render(request, 'add.html')
 
-
+@cache_control(no_cache = True, must_validate = True, no_store = True)
 @login_required(login_url="login")
 def patient(request, patient_id):
     patient = Patient.objects.get(id = patient_id)
     if patient !=None:
         return render(request, "edit.html", {'patient': patient})
 
+
+@cache_control(no_cache = True, must_validate = True, no_store = True)
+@login_required(login_url="login")
+def edit_patient(request):
+    if request.method == "POST":
+        patient = Patient.objects.get(id = request.POST.get('id'))
+        if patient != None:
+            patient.name = request.POST.get('name')
+            patient.phone = request.POST.get('phone')
+            patient.email = request.POST.get('email')
+            patient.age = request.POST.get('age')
+            patient.gender = request.POST.get('gender')
+            patient.note = request.POST.get('note')
+            patient.save()
+            messages.success(request, "Карта обновлена!")
+    return HttpResponseRedirect('/backend')
+
+
+@cache_control(no_cache = True, must_validate = True, no_store = True)
+@login_required(login_url="login")
+def delete_patient(request, patient_id):
+    patient = Patient.objects.get(id=patient_id)
+    patient.delete()
+    messages.success(request, "Успешно удален!")
+    return HttpResponseRedirect('/backend')

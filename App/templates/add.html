@@ -1,38 +1,57 @@
 {% extends 'base.html' %}
 
+{% block title %} Новая карта {% endblock title %}
+
+{% block nav-content %}
+    <i class="fas fa-user-plus"></i>&nbsp; &nbsp;Добавить пациента
+{% endblock nav-content %}
+
+{% block time %}
+    <div class="col-sm" style="text-align: center">
+        <div >
+            <span id="clock" style="color: lightblue;"></span>
+        </div >
+    </div>
+{% endblock time %}
+
+{% block btn-nav %}
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm border-light text-light"
+       data-bs-toggle="modal" data-bs-target="#logoutModal" id="btn-nav">Выход</a>
+{% endblock btn-nav %}
+
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card card-body border-dark text-primary mt-5">
                 <span class="text-center">
-                    Заполните форму ниже!
+                    {% block card_title %}Заполните форму ниже{% endblock card_title %}
                 </span>
                 </div>
-                <form action="/add_patient/" method="POST" autocomplete="off" class="card p-3 border-dark mt-3">
+                <form {% block Action %} action="/add_patient/" {% endblock Action %} method="POST" autocomplete="off" class="card p-3 border-dark mt-3">
                     {% csrf_token %}
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text side-made" >ФИО</span>
+                        <span class="input-group-text side-label" >ФИО</span>
                         <input type="text" class="form-control side-label" name="name" placeholder="Фамилия, имя и отчество:"
                                 {% block Value-name %} {% endblock Value-name %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text side-mane">Телефон</span>
+                        <span class="input-group-text side-label">Телефон</span>
                         <input type="text" class="form-control" name="phone" placeholder="Телефон:"
-                                {% block Value-phone %} {% endblock Value-phone %}>>
+                                {% block Value-phone %} {% endblock Value-phone %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text side-maid" >Email</span>
+                        <span class="input-group-text side-label" >Email</span>
                         <input type="text" class="form-control" name="email" placeholder="Электронная почта:"
                                 {% block Value-email %} {% endblock Value-email %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <span class="input-group-text side-made">Возраст</span>
-                        <input type="text" class="form-control" name="age" placeholder="Возраст:">
-                        {% block Value-age %} {% endblock Value-age %}>
+                        <span class="input-group-text side-label">Возраст</span>
+                        <input type="text" class="form-control" name="age" placeholder="Возраст:"
+                             {% block Value-age %} {% endblock Value-age %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <label class="input-group-text side-made q side-made">Выберите пол:</label>
+                        <label class="input-group-text side-label">Пол:</label>
                         <select class="form-select" name="gender">
                             {% block option %}
                                 <option value="" hidden>Выберите пол</option>
@@ -43,18 +62,26 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" name="note" rows="7" placeholder="Требуется описание"></textarea>
+                        <textarea class="form-control" name="note" rows="7" placeholder="Требуется описание...">{% block note %}{% endblock note %}</textarea>
                     </div>
+
+
                     <div class="d-grid gap-2 mt-2">
                         <button type="submit" class="btn btn-primary btn-sm">
+                            {% block btn-add %}
                             <i class="fas fa-plus"></i>&nbsp;&nbsp;Добавить
+                            {% endblock btn-add %}
                         </button>
 
+                    {% block reset_btn %}{% endblock reset_btn %}
+
                         <a href="{% url 'backend' %}" class="btn btn-dark btn-sm">
-                            <i class="fas fa-chevron-left"></i>
-                            Назад
+                            <i class="fas fa-chevron-left"></i>&nbsp;&nbsp;Назад
                         </a>
                     </div>
+
+                <!--ID hidden-->
+                {% block Id-hidden %}{% endblock Id-hidden %}
                 </form>
             </div>
         </div>

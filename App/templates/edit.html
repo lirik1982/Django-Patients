@@ -1,5 +1,14 @@
 {% extends 'add.html' %}
 
+{% block title %}Редактирование карты{% endblock title %}
+
+{% block nav-content %}
+    <i class="fas fa-user-edit"></i>&nbsp; &nbsp;Редактирование карты: {{ patient.name }}
+{% endblock nav-content %}
+
+{% block Action %} action="/edit_patient/" {% endblock Action %}
+
+{% block card_title %}Дата регистрации: <span class="text-dark">{{ patient.created_at|date:"M d, Y (H:i)" }}</span>{% endblock card_title %}
 
 {% block Value-name %} value = "{{ patient.name }}" {% endblock Value-name %}
 
@@ -9,7 +18,23 @@
 
 {% block Value-age %} value = "{{ patient.age }}" {% endblock Value-age %}
 
-{% block option %}
-    <option style="background-color: #d3d3d3, color: #007bff;"{{ patient.gender }} </option>
 
+
+{% block option %}
+    <option style="background-color: #d3d3d3; color: #007bff;"> {{ patient.gender }} </option>
 {% endblock option %}
+{% block note %}{{ patient.note }}{% endblock note %}
+
+{% block btn-add %}
+<i class="fas fa-hdd"></i>&nbsp;&nbsp;Изменить
+{% endblock btn-add %}
+
+{% block reset_btn %}
+    <button type="reset" class="btn btn-secondary btn-sm"><i class="fas fa-sync-alt"></i>&nbsp;&nbsp;Отменить изменения</button>
+{% endblock reset_btn %}
+
+
+{% block Id-hidden %}
+    <input type="hidden" value="{{ patient.id }}" name="id">
+{% endblock Id-hidden %}
+
