@@ -32,27 +32,29 @@
                     {% csrf_token %}
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text side-label" >ФИО</span>
-                        <input type="text" class="form-control side-label" name="name" placeholder="Фамилия, имя и отчество:"
+                        <input type="text" class="form-control side-label"  maxlength="40"
+                               id="name" name="name" placeholder="Фамилия, имя и отчество:"
                                 {% block Value-name %} {% endblock Value-name %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text side-label">Телефон</span>
-                        <input type="text" class="form-control" name="phone" placeholder="Телефон:"
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="В формате 999-001-0001" maxlength="15"
                                 {% block Value-phone %} {% endblock Value-phone %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text side-label" >Email</span>
-                        <input type="text" class="form-control" name="email" placeholder="Электронная почта:"
+                        <input type="text" class="form-control" id="email"
+                               maxlength="40" name="email" placeholder="Электронная почта:"
                                 {% block Value-email %} {% endblock Value-email %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
                         <span class="input-group-text side-label">Возраст</span>
-                        <input type="text" class="form-control" name="age" placeholder="Возраст:"
+                        <input type="text" class="form-control" id="age" name="age" placeholder="Возраст:" maxlength="3"
                              {% block Value-age %} {% endblock Value-age %}>
                     </div>
                     <div class="input-group input-group-sm mb-3">
-                        <label class="input-group-text side-label">Пол:</label>
-                        <select class="form-select" name="gender">
+                        <label class="input-group-text side-label" >Пол:</label>
+                        <select class="form-select" name="gender" id="gender">
                             {% block option %}
                                 <option value="" hidden>Выберите пол</option>
                             {% endblock option %}>
@@ -67,7 +69,7 @@
 
 
                     <div class="d-grid gap-2 mt-2">
-                        <button type="submit" class="btn btn-primary btn-sm">
+                        <button type="submit" class="btn btn-primary btn-sm" id="btn-add">
                             {% block btn-add %}
                             <i class="fas fa-plus"></i>&nbsp;&nbsp;Добавить
                             {% endblock btn-add %}
