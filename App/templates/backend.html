@@ -57,13 +57,13 @@
                 </tr>
                 </thead>
                 {% for patient in patients %}
-                    <tr id="chk_td">
-                        <td>{{ patient.name }}</td>
-                        <td>{{ patient.phone }}</td>
-                        <td>{{ patient.email }}</td>
-                        <td>{{ patient.age }}</td>
-                        <td>{{ patient.gender }}</td>
-                        <td>{{ patient.created_at|date:"M d, Y (H:i)" }}</td>
+                    <tr class="text-small" id="chk_td">
+                        <td data-label="ФИО" id="top-table">{{ patient.name }}</td>
+                        <td data-label="Телефон" id="responsive-border">{{ patient.phone }}</td>
+                        <td data-label="Email" id="responsive-border">{{ patient.email }}</td>
+                        <td data-label="Возраст" id="responsive-border">{{ patient.age }}</td>
+                        <td data-label="Пол" id="responsive-border">{{ patient.gender }}</td>
+                        <td data-label="Дата регистрации" id="responsive-border">{{ patient.created_at|date:"M d, Y (H:i)" }}</td>
                         <td>
                             <a class="btn btn-primary" href="/patient/{{ patient.id }}" title="Редактировать">
                                 <i class="fas fa-pen"></i>
@@ -178,7 +178,7 @@
 
     <span class="text-danger" id="no-data"></span>
 
-
+<br><br><br><br>
 {% endblock content %}
 
 

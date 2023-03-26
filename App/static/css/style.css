@@ -101,3 +101,83 @@ Custom sweet
     color: #111;
     border: 1px solid lightblue;
 }
+
+/************************************
+responsive 1024  tablet
+************************************/
+@media(max-width: 1024px){
+    body{
+        overflow-y: visible;
+    }
+
+    .table thead{
+    }
+
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr{
+        margin-bottom: 15px;
+        border: 1px solid #111;
+        border-radius: 5px;
+    }
+
+    .table td{
+        text-align: right;
+        padding-left: 35%;
+        position: relative;
+        border: 1px solid transparent;
+    }
+
+    .table td:before{
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+    .table > thead > tr:first-child{
+        display: none;
+        margin-top: 5px;
+    }
+    #responsive-border {
+        border: 1px solid #a9a9a9;
+    }
+    #top-table{
+        background-color: #cfe2ff;
+        color: #111;
+        font-weight: bold;
+    }
+    #btn-nav{
+        width: 75px;
+    }
+
+    #footer{
+        font-size: 12px;
+    }
+}
+
+
+/************************************
+responsive 1024  tablet
+************************************/
+@media(max-width: 500px) {
+
+    #heart{
+        display: none;
+    }
+
+    #footer{
+        font-size: 10px;
+    }
+    #btn-nav{
+        width: 65px;
+        font-size: 12px;
+        margin-right: 15px;
+    }
+
+}
